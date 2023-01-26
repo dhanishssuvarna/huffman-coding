@@ -34,6 +34,7 @@ public class HuffmanCompression implements Compression {
             BufferedReader bf = new BufferedReader(new FileReader(path));
             while ((curLine = bf.readLine()) != null){
                 s.append(curLine);
+                s.append("\n");
             }
             bf.close();
         } catch (IOException e) {
@@ -174,8 +175,7 @@ public class HuffmanCompression implements Compression {
         String bitStr="";
         try {
             FileWriter fw = new FileWriter(f);
-            fw.write(n);
-            fw.write(postOrderStrSize);
+            fw.write(Integer.toString(n)+","+Integer.toString(postOrderStrSize)+System.lineSeparator());
             fw.write(postOrderStr);
             for(char c:s.toString().toCharArray()){
                 String bit = table.get(c);

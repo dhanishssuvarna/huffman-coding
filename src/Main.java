@@ -9,7 +9,7 @@ public class Main {
 //        String s = "T’ enjoy æ thy banish’d lord and this great land!";
 
 
-        String originalFile = "test.txt";
+        String originalFile ="pg100.txt";
         String compressedFile = "compress.txt";
 
         HuffmanCompression hc = new HuffmanCompression(originalFile);

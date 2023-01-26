@@ -14,6 +14,8 @@ public class HuffmanDecompression implements Decompression {
      * The Path.
      */
     String path;
+    int n;
+    int postSize;
     /**
      * The Str.
      */
@@ -30,10 +32,19 @@ public class HuffmanDecompression implements Decompression {
 
      public void getContent(){
         String curLine=null;
+        boolean flag=true;
         try {
             BufferedReader bf = new BufferedReader(new FileReader(path));
             while ((curLine = bf.readLine()) != null){
-                str.append(curLine);
+                if(flag){
+                    String[] split = curLine.split(",");
+                    n = Integer.parseInt(split[0]);
+                    postSize = Integer.parseInt(split[1]);
+                    flag=false;
+                }else{
+                    str.append(curLine);
+                    str.append("\n");
+                }
             }
             bf.close();
         } catch (IOException e) {
@@ -91,12 +102,10 @@ public class HuffmanDecompression implements Decompression {
 
     public void decompression(){
         getContent();
-        System.out.println(str.toString());
+//        System.out.println(str.toString());
         System.out.println("Total Size : "+str.toString().length());
 
-        int n = str.charAt(0);
-        int postSize = str.charAt(1);
-        String postOrder = str.substring(2, postSize+2);
+        String postOrder = str.substring(0, postSize);
 
         System.out.println("n : "+n);
         System.out.println("postSize : "+postSize);
@@ -105,29 +114,29 @@ public class HuffmanDecompression implements Decompression {
         Node root = recreateTree(postOrder);
 
         StringBuilder bits = new StringBuilder();
-        getBitString(bits, postSize+2, str.length());
+        getBitString(bits, postSize, str.length());
 
         try {
-            int i=0, charCnt=0;
+            int i=0;
+            long charCnt=0;
             FileWriter fw = new FileWriter("decompress.txt");
 
-            while (charCnt<n) {
+            while (i< bits.length()) {
                 Node temp = root;
                 while(temp.left != null && temp.right!= null){
                     if(bits.charAt(i) == '0'){
                         temp=temp.left;
-                        i++;
                     }
                     else{
                         temp=temp.right;
-                        i++;
                     }
+                    i++;
                 }
-                System.out.print((char) temp.value);
+//                System.out.print((char) temp.value);
                 fw.write(temp.value);
                 charCnt++;
             }
-            System.out.println();
+//            System.out.println();
             fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
