@@ -7,7 +7,7 @@ public interface Compression {
     /**
      * Gets content of the input file
      */
-    void getContent();
+    void generateCharFreq();
 
     /**
      * Compress the input file

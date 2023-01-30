@@ -1,21 +1,30 @@
 import compress.HuffmanCompression;
 import decompress.HuffmanDecompression;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-//        String s = "go go gophers";
-//        String s = "streets are stone stars are not";
-//        String s = "T’ enjoy æ thy banish’d lord and this great land!";
+        Scanner sc = new Scanner(System.in);
 
+        System.out.print("Enter the file name : ");
+        String originalFile = sc.nextLine();
+        sc.close();
 
-        String originalFile ="pg100.txt";
         String compressedFile = "compress.txt";
 
+        long start = System.currentTimeMillis();
         HuffmanCompression hc = new HuffmanCompression(originalFile);
         hc.compress();
+        long end = System.currentTimeMillis();
+        System.out.println("Compress : "+(end - start) + " ms");
+
+        start = System.currentTimeMillis();
         HuffmanDecompression hd = new HuffmanDecompression(compressedFile);
         hd.decompression();
+        end = System.currentTimeMillis();
+        System.out.println("Decompress : "+(end - start) + " ms");
 
     }
 }

@@ -5,11 +5,6 @@ package decompress;
  */
 public interface Decompression {
     /**
-     * Gets content of compressed file
-     */
-    void getContent();
-
-    /**
      * Decompression the compressed file
      */
     void decompression();
