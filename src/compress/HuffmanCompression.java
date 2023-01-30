@@ -6,14 +6,37 @@ import treeNode.Node;
 import java.io.*;
 import java.util.*;
 
+/**
+ * The type Huffman compression.
+ */
 public class HuffmanCompression implements Compression {
+    /**
+     * The Path of the original file
+     */
     String path;
+    /**
+     * The S contains the original contents of the file
+     */
     StringBuilder s = new StringBuilder();
+    /**
+     * The Mp contains the frequency of the char
+     */
     Map<Character, Integer> mp = new HashMap<>();
+    /**
+     * The Pq is used construct Tree
+     */
     PriorityQueue<Node> pq = new PriorityQueue<>(new CharComparator());
+    /**
+     * The Table contains the Huffman codes for each char
+     */
     Map<Character, String> table = new HashMap<>();
 
 
+    /**
+     * Instantiates a new Huffman compression.
+     *
+     * @param path the path
+     */
     public HuffmanCompression(String path){
         this.path=path;
     }
@@ -35,6 +58,11 @@ public class HuffmanCompression implements Compression {
         }
     }
 
+    /**
+     * Generate tree node.
+     *
+     * @return the node
+     */
     Node generateTree(){
         for(Map.Entry<Character, Integer> e : mp.entrySet()) {
 //            System.out.println(e.getKey()+" : "+ e.getValue());
@@ -63,6 +91,12 @@ public class HuffmanCompression implements Compression {
         return pq.peek();
     }
 
+    /**
+     * Gets the table content
+     *
+     * @param root the root
+     * @param str  the str
+     */
     void getTable(Node root, String str) {
         if(root==null)
             return;
@@ -74,6 +108,11 @@ public class HuffmanCompression implements Compression {
         getTable(root.right,str + "1");
     }
 
+    /**
+     * Generate table for each char
+     *
+     * @param root the root
+     */
     void generateTable(Node root){
         String temp="";
         getTable(root, temp);
@@ -87,8 +126,6 @@ public class HuffmanCompression implements Compression {
         generateCharFreq();
         Node root = generateTree();
         generateTable(root);
-
-        File f = new File("compress.txt");
 
         StringBuilder bitStr=new StringBuilder();
         try {

@@ -27,8 +27,8 @@ public class Node implements Serializable {
     /**
      * Instantiates a new Node.
      *
-     * @param value  the value
-     * @param weight the weight
+     * @param value  the ascii of the char
+     * @param weight the frequency of char
      */
     public Node(int value, int weight) {
         this.value = value;

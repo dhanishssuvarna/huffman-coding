@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"treeNode","l":"CharComparator"},{"p":"compress","l":"Compression"},{"p":"decompress","l":"Decompression"},{"p":"compress","l":"HuffmanCompression"},{"p":"decompress","l":"HuffmanDecompression"},{"p":"<Unnamed>","l":"Main"},{"p":"treeNode","l":"Node"}];updateSearchResults();

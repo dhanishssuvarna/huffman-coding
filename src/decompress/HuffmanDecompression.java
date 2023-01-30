@@ -2,13 +2,30 @@ package decompress;
 import treeNode.Node;
 import java.io.*;
 
+/**
+ * The type Huffman decompression.
+ */
 public class HuffmanDecompression implements Decompression {
+    /**
+     * The Path of the compressed file
+     */
     String path;
 
+    /**
+     * Instantiates a new Huffman decompression.
+     *
+     * @param path the path
+     */
     public HuffmanDecompression(String path){
         this.path=path;
     }
 
+    /**
+     * Generates the bit string for each char
+     *
+     * @param ch the ch
+     * @return the string
+     */
     String getBitString(char ch){
         int c=ch;
         StringBuilder binary = new StringBuilder();
@@ -26,7 +43,7 @@ public class HuffmanDecompression implements Decompression {
             ObjectInputStream in = new ObjectInputStream(fin);
 
             Node root = (Node) in.readObject();
-            int paddedZeros = (int) in.readInt();
+            int paddedZeros = in.readInt();
             String compressedString = (String) in.readObject();
 
             in.close();
@@ -62,6 +79,4 @@ public class HuffmanDecompression implements Decompression {
             System.out.println(e);
         }
     }
-
-
 }
