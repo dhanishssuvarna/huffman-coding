@@ -7,3 +7,11 @@
 	small.txt,7\d\7dce724251cb396cebf1b3ea068a13023968315f
 <
 compress.txt,d\d\dd60a3ef2e109758bf8e82af94f0c8937f35847b
+F
+src/treeNode/Node.java,1\a\1af58a3219ed34f358c9617acbc42f849200dbd5
+P
+ src/treeNode/CharComparator.java,1\e\1e08a58eeeb7b357f209976423ceba16f63e561e
+M
+src/compress/Compression.java,b\6\b6b8f83c1a43ca28fadab5163efec65ac9e56903
+Q
+!src/decompress/Decompression.java,7\5\75b6ffea08e23c05da42d7d242d0e7ca68a61595
