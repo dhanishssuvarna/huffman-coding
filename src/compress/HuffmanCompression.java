@@ -134,15 +134,15 @@ public class HuffmanCompression implements Compression {
                 bitStr.append(bit);
             }
 
-            int paddedZeros=7-(bitStr.length()%7);
+            int paddedZeros=8-(bitStr.length()%8);
             bitStr.append("0".repeat(paddedZeros));
 
-            StringBuilder CompressedStr=new StringBuilder();
-
-            for(int i=0; i< bitStr.length(); i=i+7) {
-                String t = bitStr.substring(i, i+7);
-                char ch = (char) Integer.parseInt(t, 2);
-                CompressedStr.append(ch);
+            byte[] byteArray = new byte[bitStr.length()/8];
+            int k=0;
+            for(int i=0; i< bitStr.length(); i=i+8) {
+                String t = bitStr.substring(i, i+8);
+                byte ch = (byte) Integer.parseInt(t, 2);
+                byteArray[k++]=ch;
             }
 
             FileOutputStream fout = new FileOutputStream("compress.txt");
@@ -150,7 +150,7 @@ public class HuffmanCompression implements Compression {
             ObjectOutputStream out =new ObjectOutputStream(fout);
             out.writeObject(root);
             out.writeInt(paddedZeros);
-            out.writeObject(CompressedStr.toString());
+            out.writeObject(byteArray);
             out.close();
             fout.close();
 

@@ -21,6 +21,7 @@ public class CheckCompression {
     public boolean CompareFiles(String file1,String file2){
         byte[] arr1 = getByteArray(file1);
         byte[] arr2 = getByteArray(file2);
+
         if(Arrays.equals(arr1,arr2))
             return true;
         else

@@ -24,6 +24,17 @@ public class Main {
         String compressedFile = "compress.txt";
         String decompressedFile = "decompress.txt";
 
+        try {
+            DataOutputStream os = new DataOutputStream(new FileOutputStream("extraAscii.txt"));
+
+            for(int i=128; i<256; i++){
+                os.writeByte((byte) i);
+            }
+            os.close();
+        }catch (Exception e){
+
+        }
+
         System.out.println("\nCompressing File........");
         HuffmanCompression hc = new HuffmanCompression(originalFile);
         long start = System.currentTimeMillis();

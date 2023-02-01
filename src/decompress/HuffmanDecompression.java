@@ -1,6 +1,7 @@
 package decompress;
 import treeNode.Node;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * The type Huffman decompression.
@@ -20,23 +21,6 @@ public class HuffmanDecompression implements Decompression {
         this.path=path;
     }
 
-    /**
-     * Generates the bit string for each char
-     *
-     * @param ch the ch
-     * @return the string
-     */
-    String getBitString(char ch){
-        int c=ch;
-        StringBuilder binary = new StringBuilder();
-        while (c > 0 ) {
-            binary.append( c & 1 );
-            c = c >> 1;
-        }
-        binary.append("0".repeat(7 - binary.length()));
-        return binary.reverse().toString();
-    }
-
     public void decompression() {
         try {
             FileInputStream fin = new FileInputStream(path);
@@ -44,19 +28,22 @@ public class HuffmanDecompression implements Decompression {
 
             Node root = (Node) in.readObject();
             int paddedZeros = in.readInt();
-            String compressedString = (String) in.readObject();
+            byte[] compressedString = (byte[]) in.readObject();
 
             in.close();
             fin.close();
 
             StringBuilder bitStr=new StringBuilder();
-            for(char c:compressedString.toCharArray()) {
-                bitStr.append(getBitString(c));
+            for(byte b: compressedString){
+                String curByte = String.format("%8s", Integer.toBinaryString((b+256)%256)).replace(' ', '0');
+                bitStr.append(curByte);
+//                System.out.println(curByte);
             }
 
             Node temp=root;
             int i=0;
-            StringBuilder decompressedStr=new StringBuilder();
+//            ArrayList<Byte> byteArr = new ArrayList<>();
+            StringBuilder sb = new StringBuilder();
             while(i < bitStr.length()-paddedZeros)
             {
                 while(temp.left != null && temp.right != null){
@@ -67,14 +54,21 @@ public class HuffmanDecompression implements Decompression {
                         temp=temp.right;
                     i++;
                 }
-                decompressedStr.append((char)temp.value);
+//                byteArr.add((byte)temp.value);
+                sb.append((char) temp.value);
                 temp=root;
             }
 
-            FileWriter fw = new FileWriter("decompress.txt");
-            fw.write(decompressedStr.toString());
-            fw.close();
+//            byte[] res = new byte[byteArr.size()];
+//            int k=0;
+//            for(byte b: byteArr){
+//                res[k++]=b;
+//            }
 
+//            FileOutputStream f=new FileOutputStream("decompress.txt");
+            FileWriter f  = new FileWriter("decompress.txt");
+            f.write(sb.toString());
+            f.close();
         } catch (Exception e) {
             System.out.println(e);
         }
