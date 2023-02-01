@@ -24,14 +24,14 @@ public class Main {
         String compressedFile = "compress.txt";
         String decompressedFile = "decompress.txt";
 
-        System.out.println("\nCompressing File.......");
+        System.out.println("\nCompressing File........");
         HuffmanCompression hc = new HuffmanCompression(originalFile);
         long start = System.currentTimeMillis();
         hc.compress();
         long end = System.currentTimeMillis();
         long compressionTime = end - start;
 
-        System.out.println("Decompressing File.......");
+        System.out.println("Decompressing File........");
         HuffmanDecompression hd = new HuffmanDecompression(compressedFile);
         start = System.currentTimeMillis();
         hd.decompression();
