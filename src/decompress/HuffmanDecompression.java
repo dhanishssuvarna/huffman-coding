@@ -37,13 +37,12 @@ public class HuffmanDecompression implements Decompression {
             for(byte b: compressedString){
                 String curByte = String.format("%8s", Integer.toBinaryString((b+256)%256)).replace(' ', '0');
                 bitStr.append(curByte);
-//                System.out.println(curByte);
             }
 
             Node temp=root;
             int i=0;
 //            ArrayList<Byte> byteArr = new ArrayList<>();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder decompressedStr = new StringBuilder();
             while(i < bitStr.length()-paddedZeros)
             {
                 while(temp.left != null && temp.right != null){
@@ -55,7 +54,7 @@ public class HuffmanDecompression implements Decompression {
                     i++;
                 }
 //                byteArr.add((byte)temp.value);
-                sb.append((char) temp.value);
+                decompressedStr.append((char) temp.value);
                 temp=root;
             }
 
@@ -67,7 +66,7 @@ public class HuffmanDecompression implements Decompression {
 
 //            FileOutputStream f=new FileOutputStream("decompress.txt");
             FileWriter f  = new FileWriter("decompress.txt");
-            f.write(sb.toString());
+            f.write(decompressedStr.toString());
             f.close();
         } catch (Exception e) {
             System.out.println(e);
