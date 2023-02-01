@@ -1,7 +1,6 @@
 package decompress;
 import treeNode.Node;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  * The type Huffman decompression.
@@ -41,7 +40,6 @@ public class HuffmanDecompression implements Decompression {
 
             Node temp=root;
             int i=0;
-//            ArrayList<Byte> byteArr = new ArrayList<>();
             StringBuilder decompressedStr = new StringBuilder();
             while(i < bitStr.length()-paddedZeros)
             {
@@ -53,18 +51,10 @@ public class HuffmanDecompression implements Decompression {
                         temp=temp.right;
                     i++;
                 }
-//                byteArr.add((byte)temp.value);
                 decompressedStr.append((char) temp.value);
                 temp=root;
             }
 
-//            byte[] res = new byte[byteArr.size()];
-//            int k=0;
-//            for(byte b: byteArr){
-//                res[k++]=b;
-//            }
-
-//            FileOutputStream f=new FileOutputStream("decompress.txt");
             FileWriter f  = new FileWriter("decompress.txt");
             f.write(decompressedStr.toString());
             f.close();
