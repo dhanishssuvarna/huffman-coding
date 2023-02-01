@@ -20,6 +20,23 @@ public class HuffmanDecompression implements Decompression {
         this.path=path;
     }
 
+
+    /**
+     * Generates the bit string for each char
+     *
+     * @param c the c
+     * @return the string
+     */
+    String getBitString(int c){
+        StringBuilder binary = new StringBuilder();
+        while (c > 0 ) {
+            binary.append( c & 1 );
+            c = c >> 1;
+        }
+        binary.append("0".repeat(8 - binary.length()));
+        return binary.reverse().toString();
+    }
+
     public void decompression() {
         try {
             FileInputStream fin = new FileInputStream(path);
@@ -34,8 +51,11 @@ public class HuffmanDecompression implements Decompression {
 
             StringBuilder bitStr=new StringBuilder();
             for(byte b: compressedString){
-                String curByte = String.format("%8s", Integer.toBinaryString((b+256)%256)).replace(' ', '0');
-                bitStr.append(curByte);
+                if(b>0){
+                    bitStr.append(getBitString((int) b));
+                }else{
+                    bitStr.append(getBitString((int) (b+256)%256));
+                }
             }
 
             Node temp=root;
